@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 📅 Plano de Desenvolvimento Detalhado
 
-## Getting Started
+### Dia 1: Estrutura Base e Banco de Dados
 
-First, run the development server:
+O objetivo hoje é ter o projeto rodando localmente e o banco pronto para receber inscritos.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Setup:** `npx create-next-app@latest ai-newsletter`
+* **Libs:** `@prisma/client`, `@google/generative-ai`, `@tavily/core`, `resend`, `zod`, `mjml`.
+* **DB:** Configurar o `schema.prisma` com o modelo `Subscriber`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Dia 2: Frontend e Captura de Leads
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Interface onde o usuário escolhe seus interesses.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Formulário:** Inputs de E-mail, Selects para País/Idioma e Checkboxes para Temas.
+* **API:** Rota `/api/subscribe` para salvar no MongoDB via Prisma.
 
-## Learn More
+### Dia 3: O Cérebro do Agente (Core Logic)
 
-To learn more about Next.js, take a look at the following resources:
+A "mágica" agêntica:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Search & Synthesis:** Função que integra Tavily (busca) com Gemini (raciocínio).
+* **Prompt Engineering:** Instruir o Gemini a formatar especificamente para o idioma do usuário.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Dia 4: Integração Resend e Loop de Envio
 
-## Deploy on Vercel
+Transformar o conteúdo em e-mails reais.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **MJML Integration:** Usar MJML para garantir que o layout gerado pela IA seja responsivo.
+* **Batch Logic:** Rota que processa todos os inscritos e dispara os envios.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Dia 5: Deploy e Automação na Vercel
+
+O agente ganha vida própria:
+
+* **Vercel Cron:** Configurar o `vercel.json` para o agendamento (ex: toda segunda às 9h).
+* **Teste Final:** Cadastro real e validação do recebimento.
+
+---
+
+Bora parar de só dar "oi" pro ChatGPT e começar a construir ferramentas que realmente entregam valor de forma autônoma. 🚀
