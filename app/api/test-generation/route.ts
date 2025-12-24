@@ -16,13 +16,13 @@ export async function GET(request: Request) {
 
     // 2. Generation Phase
     console.log(`[Test] Generating content using Gemini in ${language}`);
-    const htmlContent = await generateNewsletterContent(newsData, language);
+    const contentData = await generateNewsletterContent(newsData, language);
 
     return NextResponse.json({
       success: true,
       params: { country, topics, language },
       discovery_results: newsData.results?.length || 0,
-      generated_content: htmlContent 
+      generated_content: contentData
     });
   } catch (error: any) {
     console.error("Test generation error:", error);
